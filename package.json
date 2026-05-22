@@ -97,7 +97,7 @@
         "category": "Gossamer Utils"
       },
       {
-        "command": "gossamer-utils.toggleTabOut",
+        "command": "gossamer-utils.toggleTabout",
         "title": "Toggle TabOut",
         "category": "Gossamer Utils"
         },
@@ -135,12 +135,12 @@
           "default": true,
           "description": "Enable TabOut navigation with the Tab key."
         },
-        "gossamer-utils.tabOut.enableReverseShiftTab": {
+        "gossamer-utils.tabout.enableReverseShiftTab": {
           "type": "boolean",
           "default": true,
           "description": "Enable reverse TabOut navigation with Shift+Tab."
         },
-        "gossamer-utils.tabOut.characters": {
+        "gossamer-utils.tabout.characters": {
           "type": "array",
           "description": "Opening and closing character pairs to tab out from.",
           "default": [
@@ -271,7 +271,7 @@
     "vsix": "pnpm run package && pnpm dlx @vscode/vsce package"
   },
   "devDependencies": {
-    "@types/vscode": "^1.120.0",
+    "@types/vscode": "^1.50.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
     "typescript-eslint": "^8.56.1",
