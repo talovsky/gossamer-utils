@@ -3,9 +3,9 @@
   "displayName": "Gossamer Utils",
   "description": "Personal front-end utils",
   "publisher": "Talovsky",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": {
-    "name": "Talovsky",
+    "name": "Talovsky",                                                          
     "email": "nika.talovsky@gmail.com",
     "url": "https://www.github.com/talovsky"
   },

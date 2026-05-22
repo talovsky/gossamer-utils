@@ -3,7 +3,7 @@ import {
 	createArrowToFunctionEdit,
 	createFunctionToArrowEdit,
 } from '../functionTransform';
-import { findHungryDeleteRange } from '../hungryDelete';
+import { findHungryBackspaceEdit, findHungryDeleteRange } from '../hungryDelete';
 import {
 	createRenamePlan,
 	findHookTuples,
@@ -315,5 +315,55 @@ suite('Hungry Delete', () => {
 
 	test('does not cross line boundaries', () => {
 		assert.strictEqual(findHungryDeleteRange('', 0), undefined);
+	});
+
+	test('deletes the previous blank line while preserving current line indent', () => {
+		assert.deepStrictEqual(findHungryBackspaceEdit('  const b = {}', 2, 2, ''), {
+			range: {
+				start: { line: 1, character: 0 },
+				end: { line: 2, character: 0 },
+			},
+			cursor: { line: 1, character: 2 },
+		});
+	});
+
+	test('deletes the previous blank line from column zero', () => {
+		assert.deepStrictEqual(findHungryBackspaceEdit('const b = {}', 0, 2, ''), {
+			range: {
+				start: { line: 1, character: 0 },
+				end: { line: 2, character: 0 },
+			},
+			cursor: { line: 1, character: 0 },
+		});
+	});
+
+	test('deletes the previous whitespace-only line without stacking its spaces', () => {
+		assert.deepStrictEqual(findHungryBackspaceEdit('  const b = {}', 2, 2, '    '), {
+			range: {
+				start: { line: 1, character: 0 },
+				end: { line: 2, character: 0 },
+			},
+			cursor: { line: 1, character: 2 },
+		});
+	});
+
+	test('joins to the end of the previous non-empty line from leading whitespace', () => {
+		assert.deepStrictEqual(findHungryBackspaceEdit('  const b = {}', 2, 1, 'const a = {}'), {
+			range: {
+				start: { line: 0, character: 12 },
+				end: { line: 1, character: 2 },
+			},
+			cursor: { line: 0, character: 12 },
+		});
+	});
+
+	test('deletes same-line whitespace before the cursor', () => {
+		assert.deepStrictEqual(findHungryBackspaceEdit('foo   bar', 6, 0), {
+			range: {
+				start: { line: 0, character: 3 },
+				end: { line: 0, character: 6 },
+			},
+			cursor: { line: 0, character: 3 },
+		});
 	});
 });

@@ -5,7 +5,7 @@ import {
   createArrowToFunctionEdit,
   createFunctionToArrowEdit,
 } from "./functionTransform";
-import { findHungryDeleteRange } from "./hungryDelete";
+import { findHungryBackspaceEdit } from "./hungryDelete";
 import {
   createRenamePlan,
   findIdentifierRanges,
@@ -463,31 +463,53 @@ async function hungryDelete() {
     return;
   }
 
-  const deletionRanges = editor.selections.map((selection) => {
+  const edits = editor.selections.map((selection) => {
     const lineText = editor.document.lineAt(selection.active.line).text;
-    const range = findHungryDeleteRange(lineText, selection.active.character);
+    const previousLineText =
+      selection.active.line > 0
+        ? editor.document.lineAt(selection.active.line - 1).text
+        : undefined;
+    const edit = findHungryBackspaceEdit(
+      lineText,
+      selection.active.character,
+      selection.active.line,
+      previousLineText,
+    );
 
-    if (!range) {
+    if (!edit) {
       return undefined;
     }
 
-    return new vscode.Range(
-      new vscode.Position(selection.active.line, range.start),
-      new vscode.Position(selection.active.line, range.end),
-    );
+    return {
+      range: new vscode.Range(
+        new vscode.Position(edit.range.start.line, edit.range.start.character),
+        new vscode.Position(edit.range.end.line, edit.range.end.character),
+      ),
+      cursor: new vscode.Position(edit.cursor.line, edit.cursor.character),
+    };
   });
 
-  if (deletionRanges.every((range) => range === undefined)) {
+  if (edits.every((edit) => edit === undefined)) {
     await vscode.commands.executeCommand("deleteLeft");
     return;
   }
 
   await editor.edit((builder) => {
-    for (const range of deletionRanges) {
-      if (range) {
-        builder.delete(range);
+    for (const edit of edits) {
+      if (edit) {
+        builder.delete(edit.range);
       }
     }
+  });
+
+  editor.selections = editor.selections.map((selection, index) => {
+    const edit = edits[index];
+
+    if (edit) {
+      return new vscode.Selection(edit.cursor, edit.cursor);
+    }
+
+    return selection;
   });
 }
 
