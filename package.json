@@ -3,7 +3,7 @@
   "displayName": "Gossamer Utils",
   "description": "Personal front-end utils",
   "publisher": "Talovsky",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": {
     "name": "Talovsky",                                                          
     "email": "nika.talovsky@gmail.com",
@@ -118,6 +118,67 @@
         "category": "Gossamer Utils"
       }
     ],
+    "configurationDefaults": {
+      "editor.linkedEditing": true,
+      "js/ts.autoClosingTags.enabled": true,
+      "workbench.editor.useModal": "off",
+      "editor.wordWrap": "on",
+      "extensions.ignoreRecommendations": true,
+      "explorer.confirmDelete": false,
+      "js/ts.format.enabled": false,
+      "js/ts.updateImportsOnFileMove.enabled": "always",
+      "editor.minimap.enabled": false,
+      "editor.parameterHints.enabled": false,
+      "diffEditor.renderSideBySide": false,
+      "workbench.secondarySideBar.defaultVisibility": "hidden",
+      "workbench.tree.renderIndentGuides": "none",
+      "editor.guides.indentation": false,
+      "editor.lightbulb.enabled": "off",
+      "breadcrumbs.symbolPath": "off",
+      "workbench.editor.decorations.colors": false,
+      "explorer.decorations.colors": false,
+      "workbench.settings.editor": "json",
+      "workbench.browser.showInTitleBar": false,
+      "problems.decorations.enabled": false,
+      "editor.hideCursorInOverviewRuler": true,
+      "workbench.startupEditor": "none",
+      "workbench.editor.limit.enabled": true,
+      "workbench.editor.limit.value": 8,
+      "workbench.editor.tabSizing": "shrink",
+      "git.decorations.enabled": true,
+      "search.decorations.colors": false,
+      "editor.formatOnSave": true,
+      "editor.formatOnPaste": true,
+      "editor.gotoLocation.multipleDefinitions": "goto",
+      "workbench.activityBar.compact": true,
+      "explorer.confirmPasteNative": false,
+      "editor.suggest.showIcons": true,
+      "svelte.enable-ts-plugin": true,
+      "workbench.layoutControl.enabled": false,
+      "window.commandCenter": false,
+      "workbench.editor.editorActionsLocation": "hidden",
+      "workbench.panel.showLabels": false,
+      "[javascript]": {
+        "editor.tabSize": 2
+      },
+      "[typescript]": {
+        "editor.tabSize": 2
+      },
+      "[typescriptreact]": {
+        "editor.tabSize": 2
+      },
+      "[json]": {
+        "editor.tabSize": 2
+      },
+      "[jsonc]": {
+        "editor.tabSize": 2
+      },
+      "json.schemaDownload.trustedDomains": {
+        "*": true
+      },
+      "svelte.plugin.svelte.runesLegacyModeCodeLens.enable": false
+      
+    },
     "configuration": {
       "type": "object",
       "title": "Gossamer Utils",
