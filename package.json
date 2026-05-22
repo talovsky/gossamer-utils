@@ -2,6 +2,7 @@
   "name": "gossamer-utils",
   "displayName": "Gossamer Utils",
   "description": "Personal front-end utils",
+  "publisher": "Talovsky",
   "version": "0.0.4",
   "author": {
     "name": "Talovsky",
