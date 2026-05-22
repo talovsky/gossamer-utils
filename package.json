@@ -1,0 +1,261 @@
+{
+  "name": "gossamer-utils",
+  "displayName": "Gossamer Utils",
+  "description": "Personal front-end utils",
+  "version": "0.0.3",
+  "author": {
+    "name": "Talovsky",
+    "email": "nika.talovsky@gmail.com",
+    "url": "https://www.github.com/talovsky"
+  },
+  "icon": "assets/icon.png",
+  "engines": {
+    "vscode": "^1.50.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact",
+    "onLanguage:html",
+    "onLanguage:svelte",
+    "onLanguage:astro",
+    "onLanguage:vue"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "reactify.jumpToMatchingBracketOrTag",
+        "title": "Jump to Matching Bracket or Tag"
+      },
+      {
+        "command": "reactify.jumpToMatchingTag",
+        "title": "Match Tag",
+        "category": "Reactify"
+      },
+      {
+        "command": "reactify.removeTagPreserveChildren",
+        "title": "Remove Tag",
+        "category": "Reactify"
+      },
+      {
+        "command": "reactify.balanceTagInward",
+        "title": "Balance Inward",
+        "category": "Reactify"
+      },
+      {
+        "command": "reactify.balanceTagOutward",
+        "title": "Balance Outward",
+        "category": "Reactify"
+      },
+      {
+        "command": "reactify.renameSymbol",
+        "title": "Rename Symbol",
+        "category": "Reactify"
+      },
+      {
+        "command": "reactify.goToDefinition",
+        "title": "Go to Definition",
+        "category": "Reactify"
+      },
+      {
+        "command": "reactify.convertFunctionToArrow",
+        "title": "Convert Function Declaration to Arrow Function",
+        "category": "Reactify"
+      },
+      {
+        "command": "reactify.convertArrowToFunction",
+        "title": "Convert Arrow Function to Function Declaration",
+        "category": "Reactify"
+      },
+      {
+        "command": "reactify.wrapSelectionWithTag",
+        "title": "Wrap Selection with Tag",
+        "category": "Reactify"
+      },
+      {
+        "command": "reactify.wrapSelectionInUseMemo",
+        "title": "Wrap Selection in useMemo",
+        "category": "Reactify"
+      },
+      {
+        "command": "reactify.wrapSelectionInUseCallback",
+        "title": "Wrap Selection in useCallback",
+        "category": "Reactify"
+      },
+      {
+        "command": "reactify.wrapSelectionInFragment",
+        "title": "Wrap Selection in Fragment",
+        "category": "Reactify"
+      },
+      {
+        "command": "reactify.toggleTabOut",
+        "title": "Toggle TabOut",
+        "category": "Reactify"
+      },
+      {
+        "command": "reactify.hungryDelete",
+        "title": "Hungry Delete",
+        "category": "Reactify"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Reactify",
+      "properties": {
+        "reactify.frameworkMode": {
+          "type": "string",
+          "enum": [
+            "react",
+            "solid"
+          ],
+          "default": "react",
+          "description": "Framework mode used to filter framework-specific Quick Fix actions."
+        },
+        "reactify.tabOut.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable TabOut navigation with the Tab key."
+        },
+        "reactify.tabOut.enableReverseShiftTab": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable reverse TabOut navigation with Shift+Tab."
+        },
+        "reactify.tabOut.characters": {
+          "type": "array",
+          "description": "Opening and closing character pairs to tab out from.",
+          "default": [
+            {
+              "open": "[",
+              "close": "]"
+            },
+            {
+              "open": "{",
+              "close": "}"
+            },
+            {
+              "open": "(",
+              "close": ")"
+            },
+            {
+              "open": "'",
+              "close": "'"
+            },
+            {
+              "open": "\"",
+              "close": "\""
+            },
+            {
+              "open": ":",
+              "close": ":"
+            },
+            {
+              "open": "=",
+              "close": "="
+            },
+            {
+              "open": ">",
+              "close": ">"
+            },
+            {
+              "open": "<",
+              "close": "<"
+            },
+            {
+              "open": ".",
+              "close": "."
+            },
+            {
+              "open": "`",
+              "close": "`"
+            },
+            {
+              "open": ";",
+              "close": ";"
+            }
+          ],
+          "items": {
+            "type": "object",
+            "required": [
+              "open",
+              "close"
+            ],
+            "properties": {
+              "open": {
+                "type": "string",
+                "description": "Opening character."
+              },
+              "close": {
+                "type": "string",
+                "description": "Closing character."
+              }
+            }
+          }
+        },
+        "reactify.hungryDelete.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Backspace to delete contiguous spaces and tabs before the cursor."
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "reactify.jumpToMatchingBracketOrTag",
+        "key": "ctrl+shift+\\",
+        "mac": "cmd+shift+\\",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "reactify.tabout",
+        "key": "tab",
+        "mac": "tab",
+        "when": "config.reactify.tabOut.enabled && editorTextFocus && !editorHasSelection && !suggestWidgetVisible && !inlineSuggestionVisible && !inlineEditIsVisible"
+      },
+      {
+        "command": "reactify.taboutReverse",
+        "key": "shift+tab",
+        "mac": "shift+tab",
+        "when": "config.reactify.tabOut.enabled && config.reactify.tabOut.enableReverseShiftTab && editorTextFocus && !editorHasSelection && !suggestWidgetVisible && !inlineSuggestionVisible && !inlineEditIsVisible"
+      },
+      {
+        "command": "reactify.hungryDelete",
+        "key": "backspace",
+        "mac": "backspace",
+        "when": "config.reactify.hungryDelete.enabled && editorTextFocus && !editorReadonly"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "compile": "pnpm run check-types && pnpm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "pnpm run check-types && pnpm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "vsix": "pnpm run package && pnpm dlx @vscode/vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.120.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.56.1",
+    "eslint": "^9.39.3",
+    "esbuild": "^0.27.3",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
