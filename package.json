@@ -9,6 +9,10 @@
     "url": "https://www.github.com/talovsky"
   },
   "icon": "assets/icon.png",
+  "repository": {
+    "url": "https://github.com/talovsky/gossamer-utils",
+    "type": "git"
+  },
   "engines": {
     "vscode": "^1.50.0"
   },
@@ -29,85 +33,95 @@
   "contributes": {
     "commands": [
       {
-        "command": "reactify.jumpToMatchingBracketOrTag",
+        "command": "gossamer-utils.jumpToMatchingBracketOrTag",
         "title": "Jump to Matching Bracket or Tag"
       },
       {
-        "command": "reactify.jumpToMatchingTag",
+        "command": "gossamer-utils.jumpToMatchingTag",
         "title": "Match Tag",
-        "category": "Reactify"
+        "category": "Gossamer Utils"
       },
       {
-        "command": "reactify.removeTagPreserveChildren",
+        "command": "gossamer-utils.removeTagPreserveChildren",
         "title": "Remove Tag",
-        "category": "Reactify"
+        "category": "Gossamer Utils"
       },
       {
-        "command": "reactify.balanceTagInward",
+        "command": "gossamer-utils.balanceTagInward",
         "title": "Balance Inward",
-        "category": "Reactify"
+        "category": "Gossamer Utils"
       },
       {
-        "command": "reactify.balanceTagOutward",
+        "command": "gossamer-utils.balanceTagOutward",
         "title": "Balance Outward",
-        "category": "Reactify"
+        "category": "Gossamer Utils"
       },
       {
-        "command": "reactify.renameSymbol",
+        "command": "gossamer-utils.renameSymbol",
         "title": "Rename Symbol",
-        "category": "Reactify"
+        "category": "Gossamer Utils"
       },
       {
-        "command": "reactify.goToDefinition",
+        "command": "gossamer-utils.goToDefinition",
         "title": "Go to Definition",
-        "category": "Reactify"
+        "category": "Gossamer Utils"
       },
       {
-        "command": "reactify.convertFunctionToArrow",
+        "command": "gossamer-utils.convertFunctionToArrow",
         "title": "Convert Function Declaration to Arrow Function",
-        "category": "Reactify"
+        "category": "Gossamer Utils"
       },
       {
-        "command": "reactify.convertArrowToFunction",
+        "command": "gossamer-utils.convertArrowToFunction",
         "title": "Convert Arrow Function to Function Declaration",
-        "category": "Reactify"
+        "category": "Gossamer Utils"
       },
       {
-        "command": "reactify.wrapSelectionWithTag",
+        "command": "gossamer-utils.wrapSelectionWithTag",
         "title": "Wrap Selection with Tag",
-        "category": "Reactify"
+        "category": "Gossamer Utils"
       },
       {
-        "command": "reactify.wrapSelectionInUseMemo",
+        "command": "gossamer-utils.wrapSelectionInUseMemo",
         "title": "Wrap Selection in useMemo",
-        "category": "Reactify"
+        "category": "Gossamer Utils"
       },
       {
-        "command": "reactify.wrapSelectionInUseCallback",
+        "command": "gossamer-utils.wrapSelectionInUseCallback",
         "title": "Wrap Selection in useCallback",
-        "category": "Reactify"
+        "category": "Gossamer Utils"
       },
       {
-        "command": "reactify.wrapSelectionInFragment",
+        "command": "gossamer-utils.wrapSelectionInFragment",
         "title": "Wrap Selection in Fragment",
-        "category": "Reactify"
+        "category": "Gossamer Utils"
       },
       {
-        "command": "reactify.toggleTabOut",
+        "command": "gossamer-utils.toggleTabOut",
         "title": "Toggle TabOut",
-        "category": "Reactify"
+        "category": "Gossamer Utils"
+        },
+        {
+        "command": "gossamer-utils.hungryDelete",
+        "title": "Hungry Delete",
+        "category": "Gossamer Utils"
       },
       {
-        "command": "reactify.hungryDelete",
-        "title": "Hungry Delete",
-        "category": "Reactify"
+        "command": "gossamer-utils.showOpenedEditors",
+        "title": "Show Opened Editors",
+        "category": "Gossamer Utils"
+      },
+      {
+        "command": "gossamer-utils.showQuickOpenWithPath",
+        "title": "Show Quick Open with Current Path",
+        "category": "Gossamer Utils"
       }
     ],
     "configuration": {
       "type": "object",
-      "title": "Reactify",
+      "title": "Gossamer Utils",
       "properties": {
-        "reactify.frameworkMode": {
+        "gossamer-utils.framework": {
           "type": "string",
           "enum": [
             "react",
@@ -116,17 +130,17 @@
           "default": "react",
           "description": "Framework mode used to filter framework-specific Quick Fix actions."
         },
-        "reactify.tabOut.enabled": {
+        "gossamer-utils.tabout.enabled": {
           "type": "boolean",
           "default": true,
           "description": "Enable TabOut navigation with the Tab key."
         },
-        "reactify.tabOut.enableReverseShiftTab": {
+        "gossamer-utils.tabOut.enableReverseShiftTab": {
           "type": "boolean",
           "default": true,
           "description": "Enable reverse TabOut navigation with Shift+Tab."
         },
-        "reactify.tabOut.characters": {
+        "gossamer-utils.tabOut.characters": {
           "type": "array",
           "description": "Opening and closing character pairs to tab out from.",
           "default": [
@@ -197,7 +211,7 @@
             }
           }
         },
-        "reactify.hungryDelete.enabled": {
+        "gossamer-utils.hungryDelete.enabled": {
           "type": "boolean",
           "default": true,
           "description": "Enable Backspace to delete contiguous spaces and tabs before the cursor."
@@ -206,28 +220,38 @@
     },
     "keybindings": [
       {
-        "command": "reactify.jumpToMatchingBracketOrTag",
+        "command": "gossamer-utils.jumpToMatchingBracketOrTag",
         "key": "ctrl+shift+\\",
         "mac": "cmd+shift+\\",
         "when": "editorTextFocus"
       },
       {
-        "command": "reactify.tabout",
+        "command": "gossamer-utils.tabout",
         "key": "tab",
         "mac": "tab",
-        "when": "config.reactify.tabOut.enabled && editorTextFocus && !editorHasSelection && !suggestWidgetVisible && !inlineSuggestionVisible && !inlineEditIsVisible"
+        "when": "config.gossamer-utils.tabout.enabled && editorTextFocus && !editorHasSelection && !suggestWidgetVisible && !inlineSuggestionVisible && !inlineEditIsVisible"
       },
       {
-        "command": "reactify.taboutReverse",
+        "command": "gossamer-utils.taboutReverse",
         "key": "shift+tab",
         "mac": "shift+tab",
-        "when": "config.reactify.tabOut.enabled && config.reactify.tabOut.enableReverseShiftTab && editorTextFocus && !editorHasSelection && !suggestWidgetVisible && !inlineSuggestionVisible && !inlineEditIsVisible"
+        "when": "config.gossamer-utils.tabout.enabled && config.gossamer-utils.tabout.enableReverseShiftTab && editorTextFocus && !editorHasSelection && !suggestWidgetVisible && !inlineSuggestionVisible && !inlineEditIsVisible"
       },
       {
-        "command": "reactify.hungryDelete",
+        "command": "gossamer-utils.hungryDelete",
         "key": "backspace",
         "mac": "backspace",
-        "when": "config.reactify.hungryDelete.enabled && editorTextFocus && !editorReadonly"
+        "when": "config.gossamer-utils.hungryDelete.enabled && editorTextFocus && !editorReadonly"
+      },
+      {
+        "command": "gossamer-utils.showOpenedEditors",
+        "key": "alt+ctrl+p",
+        "mac": "alt+cmd+p"
+      },
+      {
+        "command": "gossamer-utils.showQuickOpenWithPath",
+        "key": "ctrl+ctrl+p",
+        "mac": "ctrl+cmd+p"
       }
     ]
   },

@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 import * as vscode from 'vscode';
 import {
 	createArrowToFunctionEdit,
@@ -139,6 +141,8 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand('reactify.taboutReverse', tabOutReverse),
 		vscode.commands.registerCommand('reactify.toggleTabOut', toggleTabOut),
 		vscode.commands.registerCommand('reactify.hungryDelete', hungryDelete),
+		vscode.commands.registerCommand('reactify.showOpenedEditors', showOpenedEditors),
+		vscode.commands.registerCommand('reactify.showQuickOpenWithPath', showQuickOpenWithPath),
 	);
 }
 
@@ -591,6 +595,22 @@ function createReplacementCodeAction(
 	action.edit.replace(document.uri, range, replacement);
 
 	return action;
+}
+
+async function showOpenedEditors() {
+	await vscode.commands.executeCommand('workbench.action.quickOpen', 'edt ');
+}
+
+async function showQuickOpenWithPath() {
+	const editor = vscode.window.activeTextEditor;
+	let p = '';
+
+	if (editor) {
+		const filePath = vscode.workspace.asRelativePath(editor.document.uri, false);
+		p = path.dirname(filePath);
+	}
+
+	await vscode.commands.executeCommand('workbench.action.quickOpen', p === '.' ? '' : p);
 }
 
 function isTabOutEnabled(): boolean {
